@@ -1,0 +1,74 @@
+//选择排序
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    int arr[10] = {0};
+    int i = 0;
+    int j = 0;
+    int little = 0;
+    int max = 0;
+    int temp = 0;
+
+    srand(time(NULL));
+
+    for (i = 0; i < 10; i++)
+    {
+        arr[i] = rand() % 100 + 1;
+    }
+
+    for (i = 0; i < 10; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+
+//选择排序算法
+/*
+//<1>从小到大排
+    for (i = 0; i < 10;i++)
+    {
+        little = i;
+        for (j = i+1; j < 10;j++)
+        {
+            if(arr[j]<arr[little])   
+            {
+                little = j;
+            }
+        }
+        if(little!=i)
+        {
+            temp = arr[i];
+            arr[i] = arr[little];
+            arr[little] = temp;
+        }
+    }
+*/
+//<2> 从大到小排
+    for (i = 0; i < 10;i++)
+    {
+        max = i;
+        for (j = i + 1; j < 10;j++)
+        {
+            if(arr[j]>arr[max])
+            {
+                max = j;
+            }
+        }
+        if(max!=i)
+        {
+            temp = arr[i];
+            arr[i] = arr[max];
+            arr[max] = temp;
+        }
+    }
+
+        printf("\n");
+
+    for (i = 0; i < 10; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+        return 0;
+}
