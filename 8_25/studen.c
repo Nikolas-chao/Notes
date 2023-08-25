@@ -4,11 +4,11 @@ stu *input_info(int n)
 {
     int i = 0;
     stu *head = malloc(sizeof(stu));
-    memset(head, 0, sizeof(head));
+    memset(head, 0, sizeof(stu));
     stu *end = head;
     stu *node = NULL;
 
-    while(end!=NULL)
+    while (end != NULL)
     {
         node = malloc(sizeof(stu));
         memset(node, 0, sizeof(stu));
@@ -21,7 +21,7 @@ stu *input_info(int n)
         end->next = node;
         end = end->next;
         i++;
-        if(i>=n)
+        if (i >= n)
             break;
     }
     end->next = NULL;
@@ -32,7 +32,7 @@ void output_info(stu *head)
     stu *end = NULL;
     end = head->next;
     printf("name\tage\tscore\n");
-    while(end!=NULL)
+    while (end != NULL)
     {
         printf("%s\t%d\t%.2f\n", end->info.name, end->info.age, end->info.score);
         end = end->next;
@@ -42,7 +42,7 @@ void output_info(stu *head)
 void free_list(stu *head)
 {
     stu *end = head;
-    while(head!=NULL)
+    while (head != NULL)
     {
         end = head;
         head = head->next;

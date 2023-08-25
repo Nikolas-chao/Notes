@@ -5,41 +5,40 @@ void write_file(int n)
     FILE *fp = NULL;
     int set = 0;
 
-    stu *head_stu = NULL;
-
-    head_stu = input_info(n);
-
-    output_info(head_stu);
+    stu *head = NULL;
+    stu *end = head;
+    end = input_info(n);
+    output_info(end);
 
     fp = fopen("./student.dat", "w");
 
 
-    head_stu = head_stu->next;
+    end = end->next;
 
     for (int i = 0; i < n;i++)
     {   
-        set = fwrite(head_stu, sizeof(INFO), 1, fp);
+        set = fwrite(end, sizeof(INFO), 1, fp);
         if(set!=1)
         {
             perror("fwrite");
             exit(-1);
         }
-        head_stu = head_stu->next;
+        end = end->next;
     }
-    free_list(head_stu);
+    free_list(head);
     fclose(fp);
 }
 
 void read_file(int n)
-{
-    
+{ 
     FILE *fp = NULL;
     int ret = 0;
 
-    stu *head = malloc(sizeof(INFO));
-    memset(head, 0, sizeof(INFO));
-    stu *end = head;
+    stu *head = malloc(sizeof(stu));
+    memset(head, 0, sizeof(stu));
 
+    stu *end = head;
+    stu *node = NULL;
 
     fp = fopen("./student.dat", "r");
     if(fp==NULL)
@@ -52,20 +51,21 @@ void read_file(int n)
     
     for (int i = 0; i < n;i++)
     {   
-        ret = fread(end, sizeof(INFO), 1, fp);
+        node = malloc(sizeof(stu));
+        memset(node,0,sizeof(stu));
+        ret = fread(node, sizeof(INFO), 1, fp);
         if(ret!=1)
         {
             perror("fread");
             exit(-1);
         }
-        printf("%s\t%d\t%.1f\n", end->info.name, end->info.age, end->info.score);
-        stu *node = malloc(sizeof(stu));
-        memset(node,0,sizeof(stu));
+        printf("%s\t%d\t%.1f\n", node->info.name, node->info.age, node->info.score);
+
         end->next = node;
         end = end->next;
     }
-    end->next = NULL;
+    
+    end = NULL;
     free_list(head);
-
     fclose(fp);
 }

@@ -2,7 +2,7 @@
 
 int main()
 {
-    write_file(2);  
-    read_file(2);
+    write_file(3);  
+    read_file(3);
     return 0;
 }
