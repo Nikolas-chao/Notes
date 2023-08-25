@@ -18,5 +18,8 @@ typedef struct node
     struct node *next;
 } stu;
 
+stu *input_info(int n);
+void output_info(stu *head);
+void free_list(stu *head);
 
 #endif
