@@ -13,7 +13,6 @@ void write_file(int n)
 
     fp = fopen("./student.dat", "w");
 
- //   fprintf(fp, "name\tage\tscore\n");
 
     head_stu = head_stu->next;
 
@@ -50,6 +49,7 @@ void read_file(int n)
     }
 
     printf("name\tage\tscore\n");
+    
     for (int i = 0; i < n;i++)
     {   
         ret = fread(end, sizeof(INFO), 1, fp);
