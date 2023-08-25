@@ -1,0 +1,4 @@
+name	age	score
+mike	13	98.68
+tom	14	78.46
+jarry	14	89.56
