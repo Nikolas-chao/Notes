@@ -44,7 +44,6 @@ void commodity_management(void) // 商品管理
         case 0:
             write_file(head);
             free_list(head);
-
             printf("退出成功!\n");
             break;
         default:

@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "Product.h"
 #include "user.h"
+#include "sys_log.h"
 
 void printf_Product(void);//查看全部商品
 

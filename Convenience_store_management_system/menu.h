@@ -18,4 +18,6 @@ void menu_commodity_management(); // 商品管理
 
 void menu_Membership_management(); // 会员管理
 
+void menu_vip();//
+
 #endif

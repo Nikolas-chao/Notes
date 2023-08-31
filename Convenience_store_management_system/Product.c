@@ -1,6 +1,5 @@
 #include "Product.h"
 
-
 Product *read_file() // 读取文件
 {
     FILE *fp = NULL;
@@ -8,33 +7,33 @@ Product *read_file() // 读取文件
     int ret = 0;
 
     Product *head = NULL;
-    head=malloc(sizeof(Product));
+    head = malloc(sizeof(Product));
     memset(head, 0, sizeof(Product));
     Product *end = head;
     Product *node = NULL;
 
     fp = fopen("./Product.dat", "r");
-    if(fp==NULL)
+    if (fp == NULL)
     {
-        perror("fopen");
+        printf_log(__FUNCTION__, __FILE__, __LINE__);
         exit(-1);
     }
     ch = fgetc(fp);
     rewind(fp);
-    while(ch!=EOF)
+    while (ch != EOF)
     {
         node = malloc(sizeof(Product));
         memset(node, 0, sizeof(Product));
         ret = fread(node, sizeof(Product_info), 1, fp);
-        if(ret!=1)
+        if (ret != 1)
         {
-            perror("fread");
+            printf_log(__FUNCTION__, __FILE__, __LINE__);
         }
         //   printf("%s\t%.2f\t%.2f\t%d-%d-%d\t%d\n", node->info.name, node->info.price, node->info.vip_price, node->info.dat.year, node->info.dat.mouth, node->info.dat.day, node->info.quantity);     //查看读取到的内容
         end->next = node;
         end = end->next;
-        ch =fgetc(fp);
-        fseek(fp, -1, SEEK_CUR);     
+        ch = fgetc(fp);
+        fseek(fp, -1, SEEK_CUR);
     }
     fclose(fp);
     return head;
@@ -53,14 +52,16 @@ void write_file(Product *head)
 
     fprintf(fp_txt, "商品名称\t商品价格\t会员价格\t生产日期\t库存数量\n");
 
-    while(end!=NULL)
+    while (end != NULL)
     {
         set = fwrite(end, sizeof(Product_info), 1, fp);
-        if(set!=1)
+        if (set != 1)
         {
-            perror("fwrite");
+            printf_log(__FUNCTION__, __FILE__, __LINE__);
         }
-        fprintf(fp_txt, "%s\t  %.2f\t\t %.2f\t  %d-%d-%d\t\t%d\n",end->info.name,end->info.price,end->info.vip_price,end->info.dat.year,end->info.dat.mouth,end->info.dat.day,end->info.quantity);
+        fprintf(fp_txt, "%s\t  %.2f\t\t %.2f\t  %d-%d-%d\t\t%d\n", 
+        end->info.name, end->info.price, end->info.vip_price, 
+        end->info.dat.year, end->info.dat.mouth, end->info.dat.day, end->info.quantity);
         end = end->next;
     }
     fclose(fp);
@@ -72,8 +73,8 @@ Product *input_info(Product *head) // 新建商品
     Product *end = head;
     int i = 0;
     Product *node = NULL;
-    
-    while(end!=NULL)
+
+    while (end != NULL)
     {
         node = malloc(sizeof(Product));
         memset(node, 0, sizeof(Product));
@@ -86,11 +87,11 @@ Product *input_info(Product *head) // 新建商品
         printf("请输入上产日期:>");
         scanf("%d-%d-%d", &(node->info.dat.year), &(node->info.dat.mouth), &(node->info.dat.day));
         printf("请输入商品数量:>");
-        scanf("%d", &(node->info.quantity));       
+        scanf("%d", &(node->info.quantity));
         end->next = node;
-        end = end->next; 
+        end = end->next;
         i++;
-        if(i!=0)
+        if (i != 0)
             break;
     }
     end = NULL;
@@ -116,19 +117,19 @@ void input_info_end(Product *head) // 添加商品
     printf("请输入商品数量:>");
     scanf("%d", &(node->info.quantity));
 
-    while(end!=NULL)
+    while (end != NULL)
     {
-        if(end->next==NULL)
+        if (end->next == NULL)
         {
             bef_end = end;
         }
         end = end->next;
     }
     bef_end->next = node;
-    node->next=NULL;
+    node->next = NULL;
 }
 
-void output_info(Product *head)// 查看商品
+void output_info(Product *head) // 查看商品
 {
     if (head == NULL)
     {
@@ -236,7 +237,8 @@ void change_product(Product *head) // 修改商品
             printf("请输入会员价格:>");
             scanf("%f", &(end->info.vip_price));
             printf("请输入上产日期:>");
-            scanf("%d-%d-%d", &(end->info.dat.year), &(end->info.dat.mouth), &(end->info.dat.day));
+            scanf("%d-%d-%d", &(end->info.dat.year), 
+            &(end->info.dat.mouth), &(end->info.dat.day));
             printf("请输入商品数量:>");
             scanf("%d", &(end->info.quantity));
         }
