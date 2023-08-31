@@ -10,7 +10,6 @@ student *create_list(void) // 新建学生信息
     student *end = head;
 
     student *node = NULL;
-
     while (end != NULL)
     {
         node = (student *)malloc(sizeof(student));
