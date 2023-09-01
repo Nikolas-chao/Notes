@@ -73,13 +73,14 @@ void login_Adm()
                     break;
                 }             
             }
+            if (j >= 2)
+            {
+                printf("密码输错3次,请重新登录或退出!\n");
+                break;
+            }
         }
-        if (j >= 2)
-        {
-            printf("密码输错3次,请重新登录或退出!\n");
-            break;
-        }
-         if(i>=2)
+       
+         if(i==2)
         {
             printf("用户名输错3次,请重新登录或退出!\n");
             break;

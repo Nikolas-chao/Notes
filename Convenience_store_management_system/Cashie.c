@@ -235,6 +235,7 @@ void Pay(Product *shop)
         case 0:
             printf("您的小票为:>\n");
             printf_shop(shop, head, pay);
+            get_localtime();
             printf("退出成功!\n");
             break;
         default:
@@ -265,5 +266,5 @@ void printf_shop(Product *shop, Product *head, float pay)
         }
         end = end->next;
     }
-    printf("合计：%.2f元", pay);
+    printf("合计：%.2f元\n", pay);
 }
