@@ -247,16 +247,21 @@ void Pay(Product *shop)
 
 void printf_shop(Product *shop, Product *head, float pay)
 {
+    FILE *fp = NULL;
+    fp = fopen("./shop.txt", "w");
     Product *end = head;
     end = head->next;
     Product *node = shop;
     node = node->next;
     printf("商品名\t\t价格\t会员价格\n");
+    fprintf(fp, "商品名\t\t价格\t会员价格\n");
     while (node != NULL)
     {
         while (!strcmp(node->info.name, end->info.name))
         {
             printf("%s\t%.2f\t%.2f\n", node->info.name, end->info.price, end->info.vip_price);
+            node = node->next;
+            fprintf(fp,"%s\t%.2f\t%.2f\n", node->info.name, end->info.price, end->info.vip_price);
             node = node->next;
             if (node == NULL)
             {
@@ -267,4 +272,5 @@ void printf_shop(Product *shop, Product *head, float pay)
         end = end->next;
     }
     printf("合计：%.2f元\n", pay);
+    fclose(fp);
 }
